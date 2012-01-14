@@ -1,0 +1,27 @@
+<!DOCTYPE>
+<html>
+	<head> 
+		<link rel="chrome-webstore-item" href="https://chrome.google.com/webstore/detail/nbilgjjflfiiijecdjpnbganoiafneph">
+	</head>
+	<body>
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+		<script src="main.js"></script>
+		<script>
+			$(function () {
+				$.fn.extensionNotifier({id: 'nbilgjjflfiiijecdjpnbganoiafneph'});
+			});
+		</script>
+
+		<input id="install" value="Install" type="button"/>
+		<script>
+			$("#install").click(function () {
+					chrome.webstore.install("https://chrome.google.com/webstore/detail/nbilgjjflfiiijecdjpnbganoiafneph", function () {
+					alert('success');
+				}, function (o) {
+					alert(o);
+				});
+
+			});
+		</script>
+	</body>
+</html>
