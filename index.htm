@@ -1,0 +1,33 @@
+<!DOCTYPE>
+<html>
+	<head> 
+		<title>Emulting Chrome's infobar with a jQuery plugin</title>
+	</head>
+	<body>
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+		<script src="jquery.extinfobar.js"></script>
+		<script>
+			$(function () {
+				$.fn.extInfobar({
+					id: 'nbilgjjflfiiijecdjpnbganoiafneph',
+				});
+
+				$("#clear").click(function () {
+					localStorage.clear();
+					window.location = window.location;
+				});
+			});
+		</script>
+		<h1 style="margin-top: 40px">Testing the extInfobar extension</h1>
+		<div>If you're using any browser apart from Google Chrome, you won't see the bar.</div>
+		<div>I'm using my own plugin, <a href="https://chrome.google.com/webstore/detail/nbilgjjflfiiijecdjpnbganoiafneph" target="_blank">Paste and Go</a>, for this demo.</div>
+		<div style="margin-top: 10px">The code that I'm using for this page is:</div>
+		<pre>
+$.fn.extInfobar({
+	id: 'nbilgjjflfiiijecdjpnbganoiafneph'
+});
+		</pre>
+		<div>Once the bar is closed, the action is remembered via the localStorage so you won't see the bar again.  For testing purposes, I've provided the below button to clear the localStorage and refresh the page.</div>
+		<input id="clear" value="Clear local storage and refresh" type="button"/>
+	</body>
+</html>

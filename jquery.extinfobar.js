@@ -11,20 +11,22 @@
  },
  isChrome = function () {
 	return navigator.userAgent.toLowerCase().indexOf('chrome') >= 0;
- }, isExtensionAlreadyInstalled = function () {
- 	return chrome.app.isInstalled;
  }, getExtensionUrl = function (id) {
 	 return "https://chrome.google.com/webstore/detail/" + id;
  }, addLink = function (id) {
  	$("head").append($("<link/>").attr({'rel' : 'chrome-webstore-item', 'href' : getExtensionUrl(id)}));
+ }, saveAction = function (action) {
+ 	localStorage['action'] = action;
+ }, getAction = function () {
+ 	return localStorage['action'];
  }, animate = function (bar, height, open) {
 	bar.animate({
 		top: (open ? '+' : '-') + '=' + height
 	});
- }, buildInfoBar = function (id, height, iconUrl, text, redirectIfInstallFails) {
+ }, buildInfoBar = function (opts, height) {
 	 var bar = $("<div/>").css({'background-image': 'url(img/gradient_bar.png)', 'font-family': 'Tahoma, sans-serif', 'font-size': 14, color: '#333', color: 'black', 'border-bottom': '1.5px solid #b6bac0', height: height, position: 'absolute', left: 0, top: -height, width: '100%'}),
-	     icon = $("<img/>").attr('src', iconUrl).css({padding: 9, 'padding-left': 10, 'padding-top' : 8, float: 'left'}).attr({width: 20, height: 20}),
-	     barText = $("<span/>").css({padding:10, 'padding-left': 4, 'padding-top': 9, float: 'left'}).html(text),
+	     icon = $("<img/>").attr('src', opts.icon).css({padding: 9, 'padding-left': 10, 'padding-top' : 8, float: 'left'}).attr({width: 20, height: 20}),
+	     barText = $("<span/>").css({padding:10, 'padding-left': 4, 'padding-top': 9, float: 'left'}).html(opts.message),
 	     button = $("<button/>").css({'background-image': BUTTON, '-webkit-border-radius' : 4, border: BUTTONBORDER, float: 'right', margin: 6, padding: 3, 'padding-right': 8, 'padding-left': 9, width: 80}).html('Install'),
 	     close = $("<img/>").attr('src', CLOSE).css({float: 'right', 'padding-right': 9, 'padding-top': 13, 'margin-left' : 10});
 
@@ -34,10 +36,9 @@
 	 bar.append(button);
 
 	 close.click(function () {
-		 animate(bar, height);
-	 });
-
-	 close.hover(function () {
+		animate(bar, height);
+		opts.rememberClose && saveAction(1);
+	 }).hover(function () {
 		 $(this).attr('src', CLOSE_HOVER);
 	 },
 	 function () {
@@ -45,12 +46,14 @@
 	 });
 
 	 button.click(function () {
-		chrome.webstore.install(getExtensionUrl(id), function (m) {
+		chrome.webstore.install(getExtensionUrl(opts.id), function () {
 			animate(bar, height);
+			saveAction(1);
 		},
-		function (m) {
-			if (m === errors.notVerified && redirectIfInstallFails) {
-				window.open(getExtensionUrl(id));
+		function (error) {
+			if (error === errors.notVerified && opts.redirectIfInstallFails) {
+				window.open(getExtensionUrl(opts.id));
+				opts.rememberRedirect && saveAction(1);
 			}
 		});
 	 }).hover(function () {
@@ -69,19 +72,19 @@
 	 return bar;
  };
 
- $.fn.extensionNotifier = function (opts) {
-	if (!isChrome()) {
+ $.fn.extInfobar = function (opts) {
+	if (!isChrome() || getAction()) {
 		return;
 	}
 
-	opts = $.extend({}, $.fn.extensionNotifier.defaults, opts);
+	opts = $.extend({}, $.fn.extInfobar.defaults, opts);
 	if (!opts.id) {
-		console.log('No extension id');
+		console.log('This plugin will do nothing unless you provide the ID for your extension.');
 		return;
 	}
 
 	$(function () {
-		var infoBar = buildInfoBar(opts.id, HEIGHT, opts.icon, opts.message, opts.redirectIfInstallFails);
+		var infoBar = buildInfoBar(opts, HEIGHT);
 
 		addLink(opts.id);
 		$("body").append(infoBar);
@@ -89,9 +92,12 @@
 	});
  };
 
- $.fn.extensionNotifier.defaults = {
+ $.fn.extInfobar.defaults = {
 	icon: 'img/defaulticon.png',
-	message: 'This website has a Google Chrome extension.  Press Install to install it now',
-	redirectIfInstallFails: true
+	message: 'This website has a Google Chrome extension.  Press Install to get it now.',
+	redirectIfInstallFails: true,
+	rememberClose: true,
+	rememberRedirect: true
  };
 }(jQuery));
+
