@@ -1,3 +1,15 @@
+/*
+ * ExtInfoBar v1.1 - A jQuery plugin
+ * 
+ *  Copyright (c) 2012 Andreas Grech
+ *
+ *  Dual licensed under the MIT and GPL licenses:
+ *    http://www.opensource.org/licenses/mit-license.php
+ *    http://www.gnu.org/licenses/gpl.html
+ *
+ * http://dreasgrech.com
+ */
+
 (function ($) {
  var HEIGHT = 35,
  IMAGES_FOLDER = 'img/',
