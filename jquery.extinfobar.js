@@ -12,7 +12,7 @@
 
 (function ($) {
  var HEIGHT = 35,
- IMAGES_FOLDER = 'wp-content/themes/cloud9/img/chrome_bar/',
+ IMAGES_FOLDER = 'img/',
  CLOSE = IMAGES_FOLDER + 'close.png',
  CLOSE_HOVER = IMAGES_FOLDER + 'close_hover.png',
  BUTTONBORDER = '1px solid #988f66',
