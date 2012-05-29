@@ -12,7 +12,7 @@
 
 (function ($) {
  var HEIGHT = 35,
- IMAGES_FOLDER = 'img/',
+ IMAGES_FOLDER = 'wp-content/themes/cloud9/img/chrome_bar/',
  CLOSE = IMAGES_FOLDER + 'close.png',
  CLOSE_HOVER = IMAGES_FOLDER + 'close_hover.png',
  BUTTONBORDER = '1px solid #988f66',
@@ -33,11 +33,12 @@
  }, getAction = function () {
  	return localStorage['action'];
  }, animate = function (bar, height, open) {
-	bar.animate({
-		top: (open ? '+' : '-') + '=' + height
-	});
+ 	if (open)
+		bar.slideDown('fast');
+	else
+		bar.slideUp('fast');
  }, buildInfoBar = function (opts, height) {
-	 var bar = $("<div/>").css({'background-image': 'url(' + IMAGES_FOLDER + 'gradient_bar.png)', 'font-family': 'Tahoma, sans-serif', 'font-size': 14, color: '#333', color: 'black', 'border-bottom': '1.5px solid #b6bac0', height: height, position: 'absolute', left: 0, top: -height, width: '100%'}),
+	 var bar = $("<div/>").css({'background-image': 'url(' + IMAGES_FOLDER + 'gradient_bar.png)', 'font-family': 'Tahoma, sans-serif', 'display': 'none', 'overflow': 'hidden', 'font-size': 14, color: '#333', color: 'black', 'border-bottom': '1.5px solid #b6bac0', height: height, left: 0, top: -height, width: '100%', 'z-index': '200000000'}),
 	     icon = $("<img/>").attr('src', opts.icon).css({padding: 9, 'padding-left': 10, 'padding-top' : 8, float: 'left'}).attr({width: 20, height: 20}),
 	     barText = $("<span/>").css({padding:10, 'padding-left': 4, 'padding-top': 9, float: 'left'}).html(opts.message),
 	     button = $("<button/>").css({'background-image': BUTTON, '-webkit-border-radius' : 4, border: BUTTONBORDER, float: 'right', margin: 6, padding: 3, 'padding-right': 8, 'padding-left': 9, width: 80}).html('Install'),
@@ -100,7 +101,7 @@
 		var infoBar = buildInfoBar(opts, HEIGHT);
 
 		addLink(opts.id);
-		$("body").append(infoBar);
+		$("body").prepend(infoBar);
 		animate(infoBar, HEIGHT, 1);
 	});
  };
