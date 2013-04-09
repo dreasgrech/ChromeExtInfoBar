@@ -1,11 +1,10 @@
 /*
- * ExtInfoBar v1.1 - A jQuery plugin
+ * ExtInfoBar v0.1.2 - A jQuery plugin
  * 
  *  Copyright (c) 2012 Andreas Grech
  *
- *  Dual licensed under the MIT and GPL licenses:
- *    http://www.opensource.org/licenses/mit-license.php
- *    http://www.gnu.org/licenses/gpl.html
+ *  Licensed under the WTFPL license:
+ *    http://www.wtfpl.net/about/
  *
  * http://dreasgrech.com
  */
