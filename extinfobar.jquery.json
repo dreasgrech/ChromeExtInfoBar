@@ -6,7 +6,7 @@
         "chrome",
         "notification"
     ],
-    "version": "1.0.2",
+    "version": "1.0.3",
     "author": {
         "name": "Andreas Grech",
         "url": "http://blog.dreasgrech.com"
@@ -14,7 +14,7 @@
     "licenses": [
         {
             "type": "WTFPL",
-            "url": "https://github.com/dreasgrech/ChromeExtInfoBar/blob/master/WTFPL-LICENSE.txt"
+            "url": "https://github.com/dreasgrech/ChromeExtInfoBar/blob/master/WTFPL - LICENSE.txt"
         }
     ],
     "homepage": "http://blog.dreasgrech.com/2012/01/promoting-your-chrome-extension-with.html",

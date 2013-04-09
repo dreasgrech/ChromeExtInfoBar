@@ -1,5 +1,5 @@
 /*
- * ExtInfoBar v1.0.2 - A jQuery plugin
+ * ExtInfoBar v1.0.3 - A jQuery plugin
  * 
  *  Copyright (c) 2012 Andreas Grech
  *
