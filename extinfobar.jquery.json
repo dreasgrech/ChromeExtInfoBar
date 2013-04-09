@@ -1,0 +1,25 @@
+{
+    "name": "extinfobar",
+    "title": "Chrome Extension Information bar",
+    "description": "Emulates Chrome's infobar for promoting a Google Chrome extension.",
+    "keywords": [
+        "chrome",
+        "notification"
+    ],
+    "version": "1.1",
+    "author": {
+        "name": "Andreas Grech",
+        "url": "http://blog.dreasgrech.com"
+    },
+    "licenses": [
+        {
+            "type": "WTFPL",
+            "url": "https://github.com/jquery/jquery-color/blob/2.1.2/MIT-LICENSE.txt"
+        }
+    ],
+    "homepage": "http://blog.dreasgrech.com/2012/01/promoting-your-chrome-extension-with.html",
+    "docs": "http://blog.dreasgrech.com/2012/01/promoting-your-chrome-extension-with.html",
+    "dependencies": {
+        "jquery": ">=1.5"
+    }
+}
